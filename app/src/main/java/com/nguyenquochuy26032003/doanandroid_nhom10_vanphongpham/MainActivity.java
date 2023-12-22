@@ -34,32 +34,15 @@ public class MainActivity extends AppCompatActivity {
         actbar.setSubtitle("Văn Phòng Phẩm");
         actbar.setDisplayHomeAsUpEnabled(true);
         actbar.setDisplayShowHomeEnabled(true);
+        AnhXa();
     }
+
     private void AnhXa() {
         toolbar = findViewById(R.id.toolBarTrangChu);
         viewFlipper = findViewById(R.id.viewFlipper);
         recyclerViewTrangChu = findViewById(R.id.recyclerview);
         navigationView = findViewById(R.id.navigationView);
         listViewTrangChu= findViewById(R.id.listViewTrangChu);
-    }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu, menu);
-        return true;
-    }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        // Check if the selected item is the back button
-        if (id == android.R.id.home) {
-            ExitApp();
-            return true;
-        } else if (id == android.R.id.title) {
-            onBackPressed();
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
 
