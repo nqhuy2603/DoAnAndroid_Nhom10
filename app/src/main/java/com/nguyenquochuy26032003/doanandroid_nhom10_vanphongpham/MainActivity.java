@@ -26,14 +26,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ActionBarMenu();
-    }
-    private void ActionBarMenu() {
-        ActionBar actbar = getSupportActionBar();
-        actbar.setTitle("Xuân Cường");
-        actbar.setSubtitle("Văn Phòng Phẩm");
-        actbar.setDisplayHomeAsUpEnabled(true);
-        actbar.setDisplayShowHomeEnabled(true);
         AnhXa();
     }
 
