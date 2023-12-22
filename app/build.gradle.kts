@@ -4,7 +4,7 @@ plugins {
 
 android {
     namespace = "com.nguyenquochuy26032003.doanandroid_nhom10_vanphongpham"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.nguyenquochuy26032003.doanandroid_nhom10_vanphongpham"
