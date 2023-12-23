@@ -8,9 +8,11 @@
     tools:context=".MainActivity">
 
     <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawerLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <!-- this is a comment -->
+
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"

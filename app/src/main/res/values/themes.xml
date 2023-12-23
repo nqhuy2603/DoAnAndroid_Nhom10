@@ -1,9 +1,13 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.DoAnAndroid_Nhom10_VanPhongPham" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <!-- Remove the following line to use Toolbar instead of ActionBar -->
+        <item name="windowActionBar">false</item>
+        <!-- Add the following line if not present -->
+        <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="Theme.DoAnAndroid_Nhom10_VanPhongPham" parent="Base.Theme.DoAnAndroid_Nhom10_VanPhongPham" />
+    <style name="Theme.DoAnAndroid_Nhom10_VanPhongPham" parent="Base.Theme.DoAnAndroid_Nhom10_VanPhongPham" >
+        <!-- Customize your theme here. -->
+    </style>
 </resources>
