@@ -8,11 +8,13 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.database.Cursor;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ViewFlipper;
@@ -20,28 +22,65 @@ import android.widget.ViewFlipper;
 import com.bumptech.glide.Glide;
 import com.google.android.material.navigation.NavigationView;
 
+import org.jetbrains.annotations.Nullable;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    Toolbar toolbar;
-    ViewFlipper viewFlipper;
-    RecyclerView recyclerViewTrangChu;
-    NavigationView navigationView;
-    ListView listViewTrangChu;
-    DrawerLayout drawerLayout;
+    private Toolbar toolbar;
+    private ViewFlipper viewFlipper;
+    private RecyclerView recyclerViewTrangChu;
+    private NavigationView navigationView;
+    private ListView listViewTrangChu;
+    private DrawerLayout drawerLayout;
+    private CategoryAdapter categoryAdapter;
+    private ItemAdapter itemAdapter;
+    private DatabaseManager dbmana;
+    private DatabaseHelper dbhelper;
+    private List<Category> categories;
+    private List<Item> items;
+    private GridView recyclerview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+//      Ánh xạ layout
         AnhXa();
+        // listview loại hàng
+        ListViewCategories();
+        // listview item
+        ListViewItem();
 //      Gọi phương thức actionBar
         ActionBar();
 //      Gọi phương thức ActionViewFilipper(): nội dung thanh trượt
         ActionViewFilipper();
 
+    }
+
+    private void ListViewItem() {
+        dbmana = new DatabaseManager(MainActivity.this);
+        dbhelper = new DatabaseHelper(MainActivity.this);
+
+        // Lấy danh sách Category từ cơ sở dữ liệu
+        items = dbmana.getAllItems();
+
+        // Khởi tạo và đặt Adapter cho ListView
+        itemAdapter = new ItemAdapter(this, items);
+        recyclerview.setAdapter(itemAdapter);
+    }
+
+    private void ListViewCategories() {
+        dbmana = new DatabaseManager(MainActivity.this);
+        dbhelper = new DatabaseHelper(MainActivity.this);
+
+        // Lấy danh sách Category từ cơ sở dữ liệu
+        categories = dbmana.getCategories();
+
+        // Khởi tạo và đặt Adapter cho ListView
+        categoryAdapter = new CategoryAdapter(this, categories);
+        listViewTrangChu.setAdapter(categoryAdapter);
     }
 
     private void ActionViewFilipper() {
@@ -72,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void ActionBar() {
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         toolbar.setNavigationIcon(android.R.drawable.ic_menu_sort_by_size);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,10 +124,10 @@ public class MainActivity extends AppCompatActivity {
     private void AnhXa() {
         toolbar = findViewById(R.id.toolBarTrangChu);
         viewFlipper = findViewById(R.id.viewFlipper);
-        recyclerViewTrangChu = findViewById(R.id.recyclerview);
         navigationView = findViewById(R.id.navigationView);
-        listViewTrangChu= findViewById(R.id.listViewTrangChu);
         drawerLayout = findViewById(R.id.drawerLayout);
+        listViewTrangChu= findViewById(R.id.listViewTrangChu);
+        recyclerview = findViewById(R.id.recyclerview);
     }
 
 
