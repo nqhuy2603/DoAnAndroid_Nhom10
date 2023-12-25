@@ -8,6 +8,7 @@ public class Item {
     private int quantity;
     private String describe;
     private int image;
+
     public Item(int id, int idc, String name, float price, int quantity, String describe, int image) {
         this.id = id;
         this.idc = idc;

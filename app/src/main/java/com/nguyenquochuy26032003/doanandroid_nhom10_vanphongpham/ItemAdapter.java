@@ -18,6 +18,8 @@ public class ItemAdapter extends ArrayAdapter<Item> {
         this.context = context;
         this.items = items;
     }
+
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         // Kiểm tra xem view đã được tái sử dụng chưa, nếu chưa thì inflate layout mới
