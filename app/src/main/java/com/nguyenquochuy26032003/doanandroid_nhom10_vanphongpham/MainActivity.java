@@ -8,8 +8,12 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
+import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
@@ -17,12 +21,11 @@ import android.view.animation.AnimationUtils;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.navigation.NavigationView;
-
-import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +33,6 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private ViewFlipper viewFlipper;
-    private RecyclerView recyclerViewTrangChu;
     private NavigationView navigationView;
     private ListView listViewTrangChu;
     private DrawerLayout drawerLayout;
@@ -48,14 +50,19 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 //      Ánh xạ layout
         AnhXa();
-        // listview loại hàng
-        ListViewCategories();
-        // listview item
-        ListViewItem();
 //      Gọi phương thức actionBar
         ActionBar();
-//      Gọi phương thức ActionViewFilipper(): nội dung thanh trượt
-        ActionViewFilipper();
+        if(isConnected(this)) {
+            // Gọi phương thức ActionViewFilipper(): nội dung thanh trượt
+            ActionViewFilipper();
+            // listview loại hàng
+            ListViewCategories();
+            // listview item
+            ListViewItem();
+        } else {
+            Toast.makeText(getApplicationContext(), "Không có kết nối mạng", Toast.LENGTH_LONG).show();
+        }
+
 
     }
 
@@ -81,6 +88,8 @@ public class MainActivity extends AppCompatActivity {
         // Khởi tạo và đặt Adapter cho ListView
         categoryAdapter = new CategoryAdapter(this, categories);
         listViewTrangChu.setAdapter(categoryAdapter);
+
+
     }
 
     private void ActionViewFilipper() {
@@ -143,5 +152,19 @@ public class MainActivity extends AppCompatActivity {
                     dialog.dismiss();
                 });
         exit.create().show();
+    }
+
+    private boolean isConnected (Context context) {
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo wifi = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+        NetworkInfo mobile = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+        if ((wifi != null && wifi.isConnected()) || (mobile != null && mobile.isConnected())) {
+            return true;
+        } else return false;
+    }
+
+    protected void onDestroy() {
+        dbmana.closeDatabase();
+        super.onDestroy();
     }
 }

@@ -43,15 +43,26 @@
                     android:layout_marginTop="5dp"
                     android:textColor="@color/text"
                     android:textStyle="bold"
+                    android:textSize="24dp"
                     android:text="@string/AllItem"
                     android:layout_gravity="center"
                     />
+<!--                <androidx.recyclerview.widget.RecyclerView-->
+<!--                    android:id="@+id/recyclerview"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="12dp"-->
+<!--                    android:layout_marginLeft="4dp">-->
+
+<!--                </androidx.recyclerview.widget.RecyclerView>-->
                 <GridView
                     android:id="@+id/recyclerview"
                     android:layout_width="match_parent"
                     android:layout_height="400dp"
                     android:layout_marginTop="5dp"
-                    android:numColumns="2"/>
+                    android:numColumns="2"
+                    android:gravity="center"
+                    android:stretchMode="columnWidth" />
                 <Button
                     android:id="@+id/btnAddItem"
                     android:layout_width="match_parent"

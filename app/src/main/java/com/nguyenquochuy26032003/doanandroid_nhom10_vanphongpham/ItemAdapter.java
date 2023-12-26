@@ -8,6 +8,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class ItemAdapter extends ArrayAdapter<Item> {
@@ -39,7 +42,7 @@ public class ItemAdapter extends ArrayAdapter<Item> {
         itemName.setText(item.getName()); // Đặt tên từ dữ liệu
         double price = item.getPrice();
         String formattedPrice = String.format("%,.0f đ", price);
-        itemPrice.setText(formattedPrice);
+        itemPrice.setText("Giá: "+formattedPrice);
 
         return convertView;
     }

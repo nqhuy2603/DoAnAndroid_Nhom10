@@ -1,74 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="180dp"
-    android:layout_height="250dp"
-    android:orientation="vertical">
-    <ImageView
-        android:id="@+id/imgItem"
-        android:layout_width="168dp"
-        android:layout_height="150dp"
-        android:src="@drawable/viet_tl_079"
-        android:scaleType="fitXY"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="5dp"
-        />
-    <TextView
-        android:id="@+id/nameItem"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="LabelName"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="5dp"
-        android:textSize="6pt"
-        android:textStyle="bold"/>
-    <TableLayout
-        android:id="@+id/Price"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:elevation="8dp"
+    app:cardCornerRadius="4dp"
+    android:layout_width="150dp"
+    android:layout_height="wrap_content">
+
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:stretchColumns="2">
-        <TableRow
+        android:layout_height="match_parent">
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <ImageView
+                android:id="@+id/imgItem"
+                android:src="@drawable/category_vanphongpham"
+                android:layout_width="match_parent"
+                android:layout_height="160dp"/>
             <TextView
-                android:id="@+id/LbpriceItem"
-                android:layout_width="wrap_content"
+                android:id="@+id/nameItem"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/LabelOfPrice"
-                android:layout_marginTop="5dp"
-                android:layout_marginLeft="5dp"
-                android:textSize="6pt"
-                android:textStyle="bold" />
-
+                android:gravity="center"
+                android:text="Bút bi"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:textColor="@color/text"
+                />
             <TextView
                 android:id="@+id/priceItem"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="0dp"
-                android:text="@string/priceItem"
-                android:textSize="6pt"
+                android:gravity="center"
+                android:text="3000 vnd"
                 android:textStyle="bold"
-                android:layout_marginTop="5dp"/>
-        </TableRow>
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <Button
-                android:id="@+id/btnAdd"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Sửa"
+                android:textSize="20dp"
+                android:textColor="@color/black"
                 />
-            <Button
-                android:id="@+id/btnDelete"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Xóa"
-                />
-        </TableRow>
-    </TableLayout>
-
-
-
-</LinearLayout>
+        </LinearLayout>
+        <ImageView
+            android:src="@drawable/icon_new"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="top|right"/>
+    </FrameLayout>
+</androidx.cardview.widget.CardView>
