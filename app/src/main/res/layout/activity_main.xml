@@ -69,12 +69,14 @@
                     android:layout_height="wrap_content"
                     android:text="Thêm sản phẩm" />
             </LinearLayout>
+
         </LinearLayout>
 
         <!--Gọi thành phần NavigationView từ thư viện Material Design
             - Sử dụng trong ngăn điều hướng.
             - Cung cấp menu điều hướng tiêu chuẩn.
          -->
+
         <com.google.android.material.navigation.NavigationView
             android:id="@+id/navigationView"
             android:layout_gravity="start"
@@ -85,7 +87,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"/>
-
 
         </com.google.android.material.navigation.NavigationView>
     </androidx.drawerlayout.widget.DrawerLayout>

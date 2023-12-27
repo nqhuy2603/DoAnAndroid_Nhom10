@@ -76,19 +76,26 @@ public class MainActivity extends AppCompatActivity {
         listViewTrangChu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                switch (position) {
-                    case 0:
-                        Intent trangchu = new Intent(getApplicationContext(), MainActivity.class);
-                        startActivity(trangchu);
-                        break;
-                    case 1:
-                        Intent sach = new Intent(getApplicationContext(), SachActivity.class);
-                        startActivity(sach);
-                        break;
-                    case 2:
-                        Intent viet = new Intent(getApplicationContext(), VietActivity.class);
-                        startActivity(viet);
-                        break;
+                if (position != categories.size() - 1) {
+                    switch (position) {
+                        case 0:
+                            // Mục "Trang chủ" được chọn
+                            break;
+                        case 1:
+                            // Mục "Sách" được chọn
+                            Intent sach = new Intent(getApplicationContext(), SachActivity.class);
+                            startActivity(sach);
+                            break;
+                        case 2:
+                            // Mục "Viết" được chọn
+                            Intent viet = new Intent(getApplicationContext(), VietActivity.class);
+                            startActivity(viet);
+                            break;
+                        // Thêm các case khác tương ứng với số lượng mục từ cơ sở dữ liệu
+                    }
+                } else {
+                    // Mục "Thoát ứng dụng" được chọn
+                    ExitApp();
                 }
             }
         });
@@ -100,7 +107,6 @@ public class MainActivity extends AppCompatActivity {
 
         // Lấy danh sách Category từ cơ sở dữ liệu
         items = dbmana.getAllItems();
-
 
         // Khởi tạo và đặt Adapter cho ListView
         itemAdapter = new ItemAdapter(this, items);
@@ -115,14 +121,15 @@ public class MainActivity extends AppCompatActivity {
         categories = dbmana.getCategories();
 
         Category homeCategory = new Category(0, "Trang chủ", R.drawable.home);
-        homeCategory.setId(0); // Thiết lập giá trị mặc định cho id
-        homeCategory.setName("Trang chủ"); // Thiết lập tên cho danh mục trang chủ
         categories.add(0, homeCategory); // Thêm vào đầu danh sách
 
         // Khởi tạo và đặt Adapter cho ListView
         categoryAdapter = new CategoryAdapter(this, categories);
         listViewTrangChu.setAdapter(categoryAdapter);
 
+        // Thêm mục "Thoát ứng dụng"
+        Category exitCategory = new Category(-1, "Thoát ứng dụng", R.drawable.baseline_exit_to_app_24);
+        categories.add(exitCategory);
 
     }
 
