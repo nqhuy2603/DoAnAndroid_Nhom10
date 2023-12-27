@@ -1,4 +1,4 @@
-package com.nguyenquochuy26032003.doanandroid_nhom10_vanphongpham;
+package com.nguyenquochuy26032003.doanandroid_nhom10_vanphongpham.activity;
 
 
 import androidx.appcompat.app.AlertDialog;
@@ -6,18 +6,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
-import android.database.Cursor;
-import android.graphics.drawable.Drawable;
+import android.content.Intent;
 import android.net.ConnectivityManager;
-import android.net.Network;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -26,6 +24,13 @@ import android.widget.ViewFlipper;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.navigation.NavigationView;
+import com.nguyenquochuy26032003.doanandroid_nhom10_vanphongpham.doituong.Category;
+import com.nguyenquochuy26032003.doanandroid_nhom10_vanphongpham.adapter.CategoryAdapter;
+import com.nguyenquochuy26032003.doanandroid_nhom10_vanphongpham.data.DatabaseHelper;
+import com.nguyenquochuy26032003.doanandroid_nhom10_vanphongpham.data.DatabaseManager;
+import com.nguyenquochuy26032003.doanandroid_nhom10_vanphongpham.doituong.Item;
+import com.nguyenquochuy26032003.doanandroid_nhom10_vanphongpham.adapter.ItemAdapter;
+import com.nguyenquochuy26032003.doanandroid_nhom10_vanphongpham.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,11 +64,34 @@ public class MainActivity extends AppCompatActivity {
             ListViewCategories();
             // listview item
             ListViewItem();
+            getEventClickCategory();
         } else {
             Toast.makeText(getApplicationContext(), "Không có kết nối mạng", Toast.LENGTH_LONG).show();
         }
 
 
+    }
+
+    private void getEventClickCategory() {
+        listViewTrangChu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                switch (position) {
+                    case 0:
+                        Intent trangchu = new Intent(getApplicationContext(), MainActivity.class);
+                        startActivity(trangchu);
+                        break;
+                    case 1:
+                        Intent sach = new Intent(getApplicationContext(), SachActivity.class);
+                        startActivity(sach);
+                        break;
+                    case 2:
+                        Intent viet = new Intent(getApplicationContext(), VietActivity.class);
+                        startActivity(viet);
+                        break;
+                }
+            }
+        });
     }
 
     private void ListViewItem() {
@@ -72,6 +100,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Lấy danh sách Category từ cơ sở dữ liệu
         items = dbmana.getAllItems();
+
 
         // Khởi tạo và đặt Adapter cho ListView
         itemAdapter = new ItemAdapter(this, items);
@@ -84,6 +113,11 @@ public class MainActivity extends AppCompatActivity {
 
         // Lấy danh sách Category từ cơ sở dữ liệu
         categories = dbmana.getCategories();
+
+        Category homeCategory = new Category(0, "Trang chủ", R.drawable.home);
+        homeCategory.setId(0); // Thiết lập giá trị mặc định cho id
+        homeCategory.setName("Trang chủ"); // Thiết lập tên cho danh mục trang chủ
+        categories.add(0, homeCategory); // Thêm vào đầu danh sách
 
         // Khởi tạo và đặt Adapter cho ListView
         categoryAdapter = new CategoryAdapter(this, categories);

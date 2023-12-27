@@ -1,4 +1,4 @@
-package com.nguyenquochuy26032003.doanandroid_nhom10_vanphongpham;
+package com.nguyenquochuy26032003.doanandroid_nhom10_vanphongpham.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,9 +11,12 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.nguyenquochuy26032003.doanandroid_nhom10_vanphongpham.doituong.Item;
+import com.nguyenquochuy26032003.doanandroid_nhom10_vanphongpham.R;
 
 import java.util.List;
 
+//CÁI NÀY CODE ĐỂ ĐÓ TEST SAU
 public class SanPhamMoiAdapter extends RecyclerView.Adapter<SanPhamMoiAdapter.MyViewHolder> {
     private Context context;
     private List<Item> array;

@@ -1,9 +1,11 @@
-package com.nguyenquochuy26032003.doanandroid_nhom10_vanphongpham;
+package com.nguyenquochuy26032003.doanandroid_nhom10_vanphongpham.data;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import com.nguyenquochuy26032003.doanandroid_nhom10_vanphongpham.R;
 
 import java.util.List;
 

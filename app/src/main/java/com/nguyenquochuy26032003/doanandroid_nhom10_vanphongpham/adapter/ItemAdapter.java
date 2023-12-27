@@ -1,4 +1,4 @@
-package com.nguyenquochuy26032003.doanandroid_nhom10_vanphongpham;
+package com.nguyenquochuy26032003.doanandroid_nhom10_vanphongpham.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,9 +8,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
+import com.nguyenquochuy26032003.doanandroid_nhom10_vanphongpham.doituong.Item;
+import com.nguyenquochuy26032003.doanandroid_nhom10_vanphongpham.R;
 
-import java.text.DecimalFormat;
 import java.util.List;
 
 public class ItemAdapter extends ArrayAdapter<Item> {

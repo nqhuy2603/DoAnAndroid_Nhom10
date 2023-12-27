@@ -1,15 +1,15 @@
-package com.nguyenquochuy26032003.doanandroid_nhom10_vanphongpham;
+package com.nguyenquochuy26032003.doanandroid_nhom10_vanphongpham.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
+import com.nguyenquochuy26032003.doanandroid_nhom10_vanphongpham.doituong.Category;
+import com.nguyenquochuy26032003.doanandroid_nhom10_vanphongpham.R;
 
 import java.util.List;
 public class CategoryAdapter  extends ArrayAdapter <Category>{
