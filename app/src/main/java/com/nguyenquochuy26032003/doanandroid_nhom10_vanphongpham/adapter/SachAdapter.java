@@ -51,6 +51,7 @@ public class SachAdapter extends RecyclerView.Adapter<SachAdapter.MyViewHolder> 
                     if (!isLongClick) {
                         //click
                         Intent intent = new Intent(context, ChiTietSanPhamActivity.class);
+                        intent.putExtra("chitiet", item);
 //                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         context.startActivity(intent);
                     }

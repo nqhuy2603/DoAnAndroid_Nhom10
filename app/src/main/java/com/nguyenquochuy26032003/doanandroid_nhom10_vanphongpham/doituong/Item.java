@@ -1,6 +1,8 @@
 package com.nguyenquochuy26032003.doanandroid_nhom10_vanphongpham.doituong;
 
-public class Item {
+import java.io.Serializable;
+
+public class Item implements Serializable {
     private int id;
     private int idc;
     private String name;
