@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">VPP /n Xuân Cường</string>
+    <string name="app_name">VPP \n Xuân Cường</string>
+    <string name="newItem">Sản phẩm mới nhất</string>
+    <string name="LabelOfPrice">"Giá tiền : "</string>
+    <string name="priceItem">1.000.000</string>
+    <string name="AllItem">Tất cả sản phẩm</string>
 </resources>

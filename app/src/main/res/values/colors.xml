@@ -2,7 +2,8 @@
 <resources>
     <color name="black">#212121</color>
     <color name="white">#F2F2F2</color>
-    <color name="text">#665656</color>
+    <color name="text">#8F8F8F</color>
+    <color name="textPrice">#4D4D4D</color>
     <color name="textBold">#E4F2F2</color>
     <color name="bgProduct">#665656</color>
     <color name="bgButton">#F8991C</color>

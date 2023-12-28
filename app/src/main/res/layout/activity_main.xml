@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".activity.MainActivity">
 
     <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/drawerLayout"
@@ -40,26 +40,43 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="24dp"
+                    android:layout_marginTop="5dp"
                     android:textColor="@color/text"
                     android:textStyle="bold"
-                    android:text="Sản phẩm mới nhất"
+                    android:textSize="24dp"
+                    android:text="@string/AllItem"
+                    android:layout_gravity="center"
                     />
-                <androidx.recyclerview.widget.RecyclerView
+<!--                <androidx.recyclerview.widget.RecyclerView-->
+<!--                    android:id="@+id/recyclerview"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="12dp"-->
+<!--                    android:layout_marginLeft="4dp">-->
+
+<!--                </androidx.recyclerview.widget.RecyclerView>-->
+                <GridView
                     android:id="@+id/recyclerview"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginLeft="8dp"
-                    >
-                </androidx.recyclerview.widget.RecyclerView>
+                    android:layout_height="400dp"
+                    android:layout_marginTop="5dp"
+                    android:numColumns="2"
+                    android:gravity="center"
+                    android:stretchMode="columnWidth" />
+                <Button
+                    android:id="@+id/btnAddItem"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Thêm sản phẩm" />
             </LinearLayout>
+
         </LinearLayout>
 
         <!--Gọi thành phần NavigationView từ thư viện Material Design
             - Sử dụng trong ngăn điều hướng.
             - Cung cấp menu điều hướng tiêu chuẩn.
          -->
+
         <com.google.android.material.navigation.NavigationView
             android:id="@+id/navigationView"
             android:layout_gravity="start"
@@ -68,7 +85,8 @@
             <ListView
                 android:id="@+id/listViewTrangChu"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"/>
 
         </com.google.android.material.navigation.NavigationView>
     </androidx.drawerlayout.widget.DrawerLayout>
