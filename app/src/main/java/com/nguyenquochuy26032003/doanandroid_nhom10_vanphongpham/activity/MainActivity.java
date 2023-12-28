@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
     private DatabaseHelper dbhelper;
     private List<Category> categories;
     private List<Item> items;
-    private GridView recyclerview;
+    private GridView gridView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Khởi tạo và đặt Adapter cho ListView
         itemAdapter = new ItemAdapter(this, items);
-        recyclerview.setAdapter(itemAdapter);
+        gridView.setAdapter(itemAdapter);
     }
 
     private void ListViewCategories() {
@@ -177,7 +177,7 @@ public class MainActivity extends AppCompatActivity {
         navigationView = findViewById(R.id.navigationView);
         drawerLayout = findViewById(R.id.drawerLayout);
         listViewTrangChu= findViewById(R.id.listViewTrangChu);
-        recyclerview = findViewById(R.id.recyclerview);
+        gridView = findViewById(R.id.recyclerview);
     }
 
 
