@@ -32,6 +32,7 @@ import com.nguyenquochuy26032003.doanandroid_nhom10_vanphongpham.doituong.Item;
 import com.nguyenquochuy26032003.doanandroid_nhom10_vanphongpham.adapter.ItemAdapter;
 import com.nguyenquochuy26032003.doanandroid_nhom10_vanphongpham.R;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,7 +65,6 @@ public class MainActivity extends AppCompatActivity {
             ListViewCategories();
             // listview item
             ListViewItem();
-            getEventClickCategory();
         } else {
             Toast.makeText(getApplicationContext(), "Không có kết nối mạng", Toast.LENGTH_LONG).show();
         }
@@ -72,12 +72,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void getEventClickCategory() {
-        listViewTrangChu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (position != categories.size() - 1) {
-                    switch (position) {
+    private void getEventClickCategory(Category category) {
+        // Xử lý click cho các mục từ cơ sở dữ liệu
+        int categoryId = category.getId();
+                    switch (categoryId) {
                         case 0:
                             // Mục "Trang chủ" được chọn
                             break;
@@ -93,13 +91,8 @@ public class MainActivity extends AppCompatActivity {
                             break;
                         // Thêm các case khác tương ứng với số lượng mục từ cơ sở dữ liệu
                     }
-                } else {
-                    // Mục "Thoát ứng dụng" được chọn
-                    ExitApp();
                 }
-            }
-        });
-    }
+
 
     private void ListViewItem() {
         dbmana = new DatabaseManager(MainActivity.this);
@@ -111,6 +104,22 @@ public class MainActivity extends AppCompatActivity {
         // Khởi tạo và đặt Adapter cho ListView
         itemAdapter = new ItemAdapter(this, items);
         gridView.setAdapter(itemAdapter);
+
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // Lấy đối tượng Item tại vị trí được chọn
+                Item selectedItem = items.get(position);
+
+                // Tạo Intent để chuyển dữ liệu đối tượng Item sang ChiTietSanPhamActivity
+                Intent intent = new Intent(MainActivity.this, ChiTietSanPhamActivity.class);
+                intent.putExtra("chitiet", selectedItem);
+
+                // Chuyển sang ChiTietSanPhamActivity
+                startActivity(intent);
+            }
+        });
+
     }
 
     private void ListViewCategories() {
@@ -126,6 +135,29 @@ public class MainActivity extends AppCompatActivity {
         // Khởi tạo và đặt Adapter cho ListView
         categoryAdapter = new CategoryAdapter(this, categories);
         listViewTrangChu.setAdapter(categoryAdapter);
+
+        // Thêm mục "Sửa dữ liệu"
+        Category editData = new Category(-2, "Chỉnh sửa", R.drawable.baseline_settings_24);
+        categories.add(editData);
+
+        listViewTrangChu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Category selectedCategory = categories.get(position);
+
+                if (selectedCategory.getId() == -2) {
+                    // Mục "Chỉnh sửa" được chọn
+                    Intent editIntent = new Intent(getApplicationContext(), EditDataActivity.class);
+                    startActivity(editIntent);
+                } else if (selectedCategory.getId() == -1) {
+                    // Mục "Thoát ứng dụng" được chọn
+                    ExitApp();
+                } else {
+                    // Xử lý các mục từ cơ sở dữ liệu
+                    getEventClickCategory(selectedCategory);
+                }
+            }
+        });
 
         // Thêm mục "Thoát ứng dụng"
         Category exitCategory = new Category(-1, "Thoát ứng dụng", R.drawable.baseline_exit_to_app_24);
@@ -177,7 +209,7 @@ public class MainActivity extends AppCompatActivity {
         navigationView = findViewById(R.id.navigationView);
         drawerLayout = findViewById(R.id.drawerLayout);
         listViewTrangChu= findViewById(R.id.listViewTrangChu);
-        gridView = findViewById(R.id.recyclerview);
+        gridView = findViewById(R.id.gridView);
     }
 
 

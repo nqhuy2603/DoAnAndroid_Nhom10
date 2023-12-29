@@ -36,12 +36,14 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
 
     private void getData() {
         Item item = (Item) getIntent().getSerializableExtra("chitiet");
-        name.setText(item.getName());
-        mota.setText(item.getDescribe());
-        Glide.with(getApplicationContext()).load(item.getImage()).into(imgHinh);
-        double price = item.getPrice();
-        String formattedPrice = String.format("%,.0f đ", price);
-        priceItem.setText(formattedPrice);
+        if (item != null) {
+            name.setText(item.getName());
+            mota.setText(item.getDescribe());
+            Glide.with(getApplicationContext()).load(item.getImage()).into(imgHinh);
+            double price = item.getPrice();
+            String formattedPrice = String.format("%,.0f đ", price);
+            priceItem.setText(formattedPrice);
+        }
     }
 
     private void AnhXa() {

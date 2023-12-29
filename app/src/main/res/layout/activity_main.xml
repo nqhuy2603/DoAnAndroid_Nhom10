@@ -56,18 +56,13 @@
 
 <!--                </androidx.recyclerview.widget.RecyclerView>-->
                 <GridView
-                    android:id="@+id/recyclerview"
+                    android:id="@+id/gridView"
                     android:layout_width="match_parent"
                     android:layout_height="400dp"
                     android:layout_marginTop="5dp"
                     android:numColumns="2"
                     android:gravity="center"
                     android:stretchMode="columnWidth" />
-                <Button
-                    android:id="@+id/btnAddItem"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Thêm sản phẩm" />
             </LinearLayout>
 
         </LinearLayout>

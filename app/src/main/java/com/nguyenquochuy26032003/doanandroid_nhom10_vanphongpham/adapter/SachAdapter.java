@@ -58,7 +58,7 @@ public class SachAdapter extends RecyclerView.Adapter<SachAdapter.MyViewHolder> 
                 }
             });
         } else {
-            // Xử lý khi item là null, có thể là hiển thị một giá trị mặc định hoặc làm gì đó phù hợp với ứng dụng của bạn.
+            // Xử lý khi item là null, có thể là hiển thị một giá trị mặc định hoặc làm gì đó phù hợp với ứng dụng
         }
     }
 
