@@ -26,9 +26,7 @@ public class ItemAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        if ((items.size() > 0) && (!items.isEmpty()))
-            return  items.size();
-        return 0;
+        return items != null ? items.size() : 0;
     }
 
     @Override

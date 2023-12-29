@@ -64,7 +64,7 @@ public class SachAdapter extends RecyclerView.Adapter<SachAdapter.MyViewHolder> 
 
     @Override
     public int getItemCount() {
-        return array.size();
+        return array != null ? array.size() : 0;
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {

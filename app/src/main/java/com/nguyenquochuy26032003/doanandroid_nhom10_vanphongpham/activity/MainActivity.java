@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
         dbmana = new DatabaseManager(MainActivity.this);
         dbhelper = new DatabaseHelper(MainActivity.this);
 
-        // Lấy danh sách Category từ cơ sở dữ liệu
+        // Lấy danh sách item từ cơ sở dữ liệu
         items = dbmana.getAllItems();
 
         // Khởi tạo và đặt Adapter cho ListView
