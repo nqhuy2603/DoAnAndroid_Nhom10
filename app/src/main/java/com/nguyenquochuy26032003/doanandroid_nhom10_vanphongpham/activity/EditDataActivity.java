@@ -33,7 +33,7 @@ import java.util.Random;
 
 public class EditDataActivity extends AppCompatActivity {
     Toolbar toolbar;
-    EditText edName, edPrice, edMoTa, edCategory, edSoLuong;
+    EditText edName, edPrice, edMoTa, edCategory, edSoLuong, edID;
     Spinner spinnerImg;
     Button btnAdd, btnEdit, btnDelete, btnShow;
     ListView listViewEdit;
@@ -59,7 +59,6 @@ public class EditDataActivity extends AppCompatActivity {
         spinnerImg.setAdapter(imageAdapter);
     }
 
-
     private void AnhXa() {
         toolbar = findViewById(R.id.toolbarEdit);
         edName = findViewById(R.id.editEditTenSanPham);
@@ -67,6 +66,7 @@ public class EditDataActivity extends AppCompatActivity {
         edMoTa = findViewById(R.id.editEditMoTaSanPham);
         edCategory = findViewById(R.id.editEditDanhMucSanPham);
         edSoLuong = findViewById(R.id.editEditSoLuongSanPham);
+        edID = findViewById(R.id.editEditIDSanPham);
         spinnerImg = findViewById(R.id.editSpinnerImgSanPham);
         btnAdd = findViewById(R.id.btnAdd);
         btnAdd.setOnClickListener(new MyEvent());
@@ -111,6 +111,7 @@ public class EditDataActivity extends AppCompatActivity {
         String moTa = edMoTa.getText().toString().trim();
         String category = edCategory.getText().toString().trim();
         String soLuongStr = edSoLuong.getText().toString().trim();
+        String id = edID.getText().toString().trim();
 
         // Kiểm tra giá trị null cho các trường không được nhập
         Double price = priceStr.isEmpty() ? null : Double.parseDouble(priceStr);
@@ -119,10 +120,14 @@ public class EditDataActivity extends AppCompatActivity {
 
         String selectedImage = spinnerImg.getSelectedItem().toString();
 
-        if (name.isEmpty() || moTa.isEmpty() || category.isEmpty()) {
+        if (name.isEmpty() || moTa.isEmpty() || category.isEmpty() || priceStr.isEmpty()) {
             // Hiển thị thông báo nếu có trường nào đó không được nhập
-            Toast.makeText(EditDataActivity.this, "Vui lòng điền đầy đủ thông tin", Toast.LENGTH_SHORT).show();
-        } else {
+            Toast.makeText(EditDataActivity.this, "Vui lòng điền đầy đủ thông tin, trừ id", Toast.LENGTH_SHORT).show();
+        } else if (!id.isEmpty()) {
+            Toast.makeText(EditDataActivity.this, "Bạn đang thực hiện thao tác thêm, vui lòng không nhập id", Toast.LENGTH_SHORT).show();
+        }
+
+        else {
 
 
             // Tạo đối tượng Item từ thông tin nhập vào
@@ -145,29 +150,40 @@ public class EditDataActivity extends AppCompatActivity {
         showSanPhamAdapter = new ShowSanPhamAdapter(EditDataActivity.this, list);
         listViewEdit.setAdapter(showSanPhamAdapter);
     }
-
-//    private void deleteSanPham() {
-//        // Lấy ID của sản phẩm muốn xóa từ EditText hoặc bất kỳ nguồn dữ liệu nào bạn đang sử dụng
-//        String itemIdStr = edID.getText().toString().trim();
-//
-//        if (!itemIdStr.isEmpty()) {
-//            long itemId = Long.parseLong(itemIdStr);
-//
-//            // Gọi phương thức xóa sản phẩm từ DatabaseManager
-//            dbmana.deleteItem(itemId);
-//
-//            // Hiển thị thông báo xóa thành công
-//            Toast.makeText(EditDataActivity.this, "Xóa sản phẩm thành công", Toast.LENGTH_SHORT).show();
-//
-//            // Làm mới danh sách sản phẩm để hiển thị danh sách mới
-//            showSanPham();
-//        } else {
-//            // Hiển thị thông báo nếu ID sản phẩm không được nhập
-//            Toast.makeText(EditDataActivity.this, "Vui lòng nhập ID sản phẩm cần xóa", Toast.LENGTH_SHORT).show();
-//        }
-//    }
     private void editSanPham() {
+        String itemIdStr = edID.getText().toString().trim();
+        String name = edName.getText().toString().trim();
+        String priceStr = edPrice.getText().toString().trim();
+        String moTa = edMoTa.getText().toString().trim();
+        String category = edCategory.getText().toString().trim();
+        String soLuongStr = edSoLuong.getText().toString().trim();
+        String selectedImage = spinnerImg.getSelectedItem().toString();
+        String id = edID.getText().toString().trim();
 
+        // Kiểm tra giá trị null cho các trường không được nhập
+
+        if (itemIdStr.isEmpty() || name.isEmpty() ||  category.isEmpty() || soLuongStr.isEmpty() || priceStr.isEmpty() || moTa.isEmpty()) {
+            // Hiển thị thông báo nếu có trường nào đó không được nhập
+            Toast.makeText(EditDataActivity.this, "Vui lòng điền đầy đủ thông tin", Toast.LENGTH_SHORT).show();
+        }else if (!id.isEmpty()) {
+            Toast.makeText(EditDataActivity.this, "Bạn đang thực hiện thao tác thêm, vui lòng không nhập id", Toast.LENGTH_SHORT).show();
+        } else {
+            Integer itemId = Integer.parseInt(itemIdStr);
+            Integer price = Integer.parseInt(priceStr);
+            Integer soLuong = Integer.parseInt(soLuongStr);
+            Integer cateID = Integer.parseInt(category);
+            // Gán categoryId của bạn tùy thuộc vào cách bạn lấy được categoryId
+            long result = dbmana.updateItem(itemId, cateID, name, price, soLuong, moTa, selectedImage);
+//            String.valueOf(R.drawable.hinh_anh_san_pham_2)
+            if (result > 0) {
+                // Nếu thêm thành công, thông báo và làm mới danh sách sản phẩm
+                Toast.makeText(EditDataActivity.this, "Cập nhật sản phẩm thành công", Toast.LENGTH_SHORT).show();
+                showSanPham(); // Làm mới danh sách sản phẩm để hiển thị sản phẩm mới thêm vào
+            } else {
+                // Nếu có lỗi khi thêm sản phẩm, thông báo lỗi
+                Toast.makeText(EditDataActivity.this, "Lỗi khi cập nhật sản phẩm", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
     private void ActionToolBar() {
         setSupportActionBar(toolbar);

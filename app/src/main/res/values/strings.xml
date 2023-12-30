@@ -4,6 +4,8 @@
     <string name="LabelOfPrice">"Giá tiền : "</string>
     <string name="priceItem">1.000.000</string>
     <string name="AllItem">Tất cả sản phẩm</string>
+    <string name="LabelApp">Xuân Cường Store</string>
+    <string name="EditNotify">Nếu muốn sửa sản phẩm hãy nhập ID</string>
     <string-array name="planets_array">
         <item>Mercury</item>
         <item>Venus</item>

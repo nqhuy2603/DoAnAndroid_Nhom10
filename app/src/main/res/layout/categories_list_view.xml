@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="16dp"
+    android:layout_height="55dp"
+    android:padding="3dp"
     android:orientation="horizontal">
     <ImageView
         android:id="@+id/ImageOfCategory"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_marginLeft="12dp"
+        android:padding="10dp"
         android:src="@drawable/category_dungcuhoctap"
         />
     <TextView
