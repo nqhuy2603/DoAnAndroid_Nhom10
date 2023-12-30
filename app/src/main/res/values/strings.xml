@@ -4,4 +4,14 @@
     <string name="LabelOfPrice">"Giá tiền : "</string>
     <string name="priceItem">1.000.000</string>
     <string name="AllItem">Tất cả sản phẩm</string>
+    <string-array name="planets_array">
+        <item>Mercury</item>
+        <item>Venus</item>
+        <item>Earth</item>
+        <item>Mars</item>
+        <item>Jupiter</item>
+        <item>Saturn</item>
+        <item>Uranus</item>
+        <item>Neptune</item>
+    </string-array>
 </resources>

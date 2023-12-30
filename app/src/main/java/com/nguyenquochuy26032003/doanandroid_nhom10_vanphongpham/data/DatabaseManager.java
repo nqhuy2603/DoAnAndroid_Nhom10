@@ -144,7 +144,7 @@ public class DatabaseManager {
         db.close();
     }
     // Thêm dữ liệu cảu sản phầm
-    public long insertItem(long categoryId, String name, double price, int quantity, String describe, int image) {
+    public long insertItem(long categoryId, String name, double price, int quantity, String describe, String imagePath) {
         // Mở cơ sở dữ liệu
         openDatabase();
         ContentValues values = new ContentValues();
@@ -153,7 +153,7 @@ public class DatabaseManager {
         values.put(DatabaseHelper.COLUMN_ITEM_PRICE, price);
         values.put(DatabaseHelper.COLUMN_ITEM_QUANTITY, quantity);
         values.put(DatabaseHelper.COLUMN_ITEM_DESCRIBE, describe);
-        values.put(DatabaseHelper.COLUMN_ITEM_IMAGE, image);
+        values.put(DatabaseHelper.COLUMN_ITEM_IMAGE, imagePath);
         long result = database.insert(DatabaseHelper.TABLE_ITEM, null, values);
         // Đóng cơ sở dữ liệu
         closeDatabase();
@@ -182,6 +182,31 @@ public class DatabaseManager {
         db.close();
     }
 
+    public List<String> getImageList() {
+        List<String> imageList = new ArrayList<>();
 
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Cursor cursor = db.query(
+                true, // distinct
+                DatabaseHelper.TABLE_ITEM, // table name
+                new String[]{DatabaseHelper.COLUMN_ITEM_IMAGE}, // columns to return
+                null, // selection
+                null, // selectionArgs
+                null, // groupBy
+                null, // having
+                null, // orderBy
+                null  // limit
+        );
+
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                String imagePath = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.COLUMN_ITEM_IMAGE));
+                imageList.add(imagePath);
+            } while (cursor.moveToNext());
+            cursor.close();
+        }
+
+        return imageList;
+    }
     // Thêm các phương thức khác để thực hiện các thao tác khác nếu cần thiết
 }

@@ -40,7 +40,8 @@ public class EditDataActivity extends AppCompatActivity {
     private DatabaseHelper dbhelper;
     private ItemAdapter itemAdapter;
     List<Item> list = new ArrayList<>();
-    Context context;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +53,12 @@ public class EditDataActivity extends AppCompatActivity {
         ActionToolBar();
         ActionToolBar();
 
+        List<String> imageList = dbmana.getImageList();
+        // Create custom adapter for the Spinner
+        ArrayAdapter<String> imageAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, imageList);
+        imageAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        spinnerImg.setAdapter(imageAdapter);
     }
 
 
@@ -109,15 +116,20 @@ public class EditDataActivity extends AppCompatActivity {
         // Kiểm tra giá trị null cho các trường không được nhập
         Double price = priceStr.isEmpty() ? null : Double.parseDouble(priceStr);
         Integer soLuong = soLuongStr.isEmpty() ? null : Integer.parseInt(soLuongStr);
+        // Retrieve the selected image from the Spinner
+
+        String selectedImage = spinnerImg.getSelectedItem().toString();
 
         if (name.isEmpty() || moTa.isEmpty() || category.isEmpty()) {
             // Hiển thị thông báo nếu có trường nào đó không được nhập
             Toast.makeText(EditDataActivity.this, "Vui lòng điền đầy đủ thông tin", Toast.LENGTH_SHORT).show();
         } else {
+
+
             // Tạo đối tượng Item từ thông tin nhập vào
             long categoryId = Long.parseLong(category);  // Gán categoryId của bạn tùy thuộc vào cách bạn lấy được categoryId
-            long result = dbmana.insertItem(categoryId, name, price, 0, moTa, 0);
-
+            long result = dbmana.insertItem(categoryId, name, price, 0, moTa, selectedImage);
+//            String.valueOf(R.drawable.hinh_anh_san_pham_2)
             if (result > 0) {
                 // Nếu thêm thành công, thông báo và làm mới danh sách sản phẩm
                 Toast.makeText(EditDataActivity.this, "Thêm sản phẩm thành công", Toast.LENGTH_SHORT).show();

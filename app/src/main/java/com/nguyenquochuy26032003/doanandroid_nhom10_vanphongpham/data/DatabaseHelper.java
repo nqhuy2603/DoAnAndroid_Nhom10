@@ -33,7 +33,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String CREATE_TABLE_CATEGORY = "CREATE TABLE " + TABLE_CATEGORY + " ("
             + COLUMN_CATEGORY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + COLUMN_CATEGORY_NAME + " TEXT, "
-            + COLUMN_CATEGORY_IMAGE + " INTEGER)";
+            + COLUMN_CATEGORY_IMAGE + " TEXT)";
 
     // Câu lệnh SQL để tạo bảng Item
     private static final String CREATE_TABLE_ITEM = "CREATE TABLE " + TABLE_ITEM + " ("
@@ -43,7 +43,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + COLUMN_ITEM_PRICE + " REAL, "
             + COLUMN_ITEM_QUANTITY + " INTEGER, "
             + COLUMN_ITEM_DESCRIBE + " TEXT, "
-            + COLUMN_ITEM_IMAGE + " INTEGER, "
+            + COLUMN_ITEM_IMAGE + " TEXT, "
             + "FOREIGN KEY(" + COLUMN_ITEM_CATEGORY_ID + ") REFERENCES " + TABLE_CATEGORY + "(" + COLUMN_CATEGORY_ID + "))";
 
     public DatabaseHelper(Context context) {
@@ -170,7 +170,5 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 null
         );
     }
-
-
 }
 
