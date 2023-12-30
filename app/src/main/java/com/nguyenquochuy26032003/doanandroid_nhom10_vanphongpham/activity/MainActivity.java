@@ -68,16 +68,15 @@ public class MainActivity extends AppCompatActivity {
         } else {
             Toast.makeText(getApplicationContext(), "Không có kết nối mạng", Toast.LENGTH_LONG).show();
         }
-
-
     }
+
 
     private void getEventClickCategory(Category category) {
         // Xử lý click cho các mục từ cơ sở dữ liệu
         int categoryId = category.getId();
                     switch (categoryId) {
                         case 0:
-                            // Mục "Trang chủ" được chọn
+                            ListViewItem();
                             break;
                         case 1:
                             // Mục "Sách" được chọn
@@ -89,9 +88,28 @@ public class MainActivity extends AppCompatActivity {
                             Intent viet = new Intent(getApplicationContext(), VietActivity.class);
                             startActivity(viet);
                             break;
-                        // Thêm các case khác tương ứng với số lượng mục từ cơ sở dữ liệu
+                        case 3:
+                            Intent giayin = new Intent(getApplicationContext(),GiayInActivity.class);
+                            startActivity(giayin);
+                            break;
+                        case 4:
+                            Intent dungcuhoctap = new Intent(getApplicationContext(),DungCuHocTapActivity.class);
+                            startActivity(dungcuhoctap);
+                            break;
+                        case 5:
+                            Intent mythuat = new Intent(getApplicationContext(),MyThuatActivity.class);
+                            startActivity(mythuat);
+                            break;
+                        case 6:
+                            Intent vanphongpham = new Intent(getApplicationContext(),VanPhongPhamActivity.class);
+                            startActivity(vanphongpham);
+                            break;
+                        case 7:
+                            Intent rangdong = new Intent(getApplicationContext(),RangDongActivity.class);
+                            startActivity(rangdong);
+                            break;
                     }
-                }
+    }
 
 
     private void ListViewItem() {
@@ -121,7 +139,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-
     private void ListViewCategories() {
         dbmana = new DatabaseManager(MainActivity.this);
         dbhelper = new DatabaseHelper(MainActivity.this);
@@ -210,6 +227,13 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout = findViewById(R.id.drawerLayout);
         listViewTrangChu= findViewById(R.id.listViewTrangChu);
         gridView = findViewById(R.id.gridView);
+        ImageView image = findViewById(R.id.reloadData);
+        image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ListViewItem();
+            }
+        });
     }
 
 

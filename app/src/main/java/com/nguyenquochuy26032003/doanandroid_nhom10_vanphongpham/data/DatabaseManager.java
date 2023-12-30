@@ -160,9 +160,8 @@ public class DatabaseManager {
         return result;
     }
     // Hàm sửa dữ liệu Item
-    public void updateItem(long itemId, long newCategoryId, String newName, double newPrice, int newQuantity, String newDescribe, int newImage) {
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
-
+    public long updateItem(long itemId, long newCategoryId, String newName, int newPrice, int newQuantity, String newDescribe, String newImage) {
+        openDatabase();
         ContentValues values = new ContentValues();
         values.put(DatabaseHelper.COLUMN_ITEM_CATEGORY_ID, newCategoryId);
         values.put(DatabaseHelper.COLUMN_ITEM_NAME, newName);
@@ -171,8 +170,9 @@ public class DatabaseManager {
         values.put(DatabaseHelper.COLUMN_ITEM_DESCRIBE, newDescribe);
         values.put(DatabaseHelper.COLUMN_ITEM_IMAGE, newImage);
 
-        db.update(DatabaseHelper.TABLE_ITEM, values, DatabaseHelper.COLUMN_ITEM_ID + "=?", new String[]{String.valueOf(itemId)});
-        db.close();
+        long result = database.update(DatabaseHelper.TABLE_ITEM, values, DatabaseHelper.COLUMN_ITEM_ID + "=?", new String[]{String.valueOf(itemId)});
+        closeDatabase();
+        return result;
     }
 
     // Hàm xóa dữ liệu Item

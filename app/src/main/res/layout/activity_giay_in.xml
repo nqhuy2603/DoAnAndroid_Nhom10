@@ -4,24 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.VietActivity">
+    tools:context=".activity.GiayInActivity">
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbarViet"
+        android:id="@+id/toolbarGiayIn"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        app:title="Viết"
+        app:title="Giấy In"
         app:titleTextColor="@color/textBold"
         android:background="@color/black"
         app:layout_constraintTop_toTopOf="parent">
     </androidx.appcompat.widget.Toolbar>
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerviewViet"
+        android:id="@+id/recyclerviewGiayIn"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="12dp"
         android:layout_marginRight="12dp"
         android:layout_marginLeft="12dp"
-        app:layout_constraintTop_toBottomOf="@+id/toolbarViet"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarGiayIn"
         app:layout_constraintBottom_toBottomOf="parent">
 
     </androidx.recyclerview.widget.RecyclerView>

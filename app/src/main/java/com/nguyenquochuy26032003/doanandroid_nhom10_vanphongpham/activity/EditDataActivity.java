@@ -51,7 +51,6 @@ public class EditDataActivity extends AppCompatActivity {
 
         AnhXa();
         ActionToolBar();
-        ActionToolBar();
 
         List<String> imageList = dbmana.getImageList();
         // Create custom adapter for the Spinner
@@ -60,7 +59,6 @@ public class EditDataActivity extends AppCompatActivity {
 
         spinnerImg.setAdapter(imageAdapter);
     }
-
 
     private void AnhXa() {
         toolbar = findViewById(R.id.toolbarEdit);
@@ -168,7 +166,36 @@ public class EditDataActivity extends AppCompatActivity {
         }
     }
     private void editSanPham() {
+        String itemIdStr = edID.getText().toString().trim();
+        String name = edName.getText().toString().trim();
+        String priceStr = edPrice.getText().toString().trim();
+        String moTa = edMoTa.getText().toString().trim();
+        String category = edCategory.getText().toString().trim();
+        String soLuongStr = edSoLuong.getText().toString().trim();
+        String selectedImage = spinnerImg.getSelectedItem().toString();
 
+        // Kiểm tra giá trị null cho các trường không được nhập
+
+        if (itemIdStr.isEmpty() || name.isEmpty() ||  category.isEmpty() || soLuongStr.isEmpty() || priceStr.isEmpty() || moTa.isEmpty()) {
+            // Hiển thị thông báo nếu có trường nào đó không được nhập
+            Toast.makeText(EditDataActivity.this, "Vui lòng điền đầy đủ thông tin", Toast.LENGTH_SHORT).show();
+        } else {
+            Integer itemId = Integer.parseInt(itemIdStr);
+            Integer price = Integer.parseInt(priceStr);
+            Integer soLuong = Integer.parseInt(soLuongStr);
+            Integer cateID = Integer.parseInt(category);
+            // Gán categoryId của bạn tùy thuộc vào cách bạn lấy được categoryId
+            long result = dbmana.updateItem(itemId, cateID, name, price, soLuong, moTa, selectedImage);
+//            String.valueOf(R.drawable.hinh_anh_san_pham_2)
+            if (result > 0) {
+                // Nếu thêm thành công, thông báo và làm mới danh sách sản phẩm
+                Toast.makeText(EditDataActivity.this, "Cập nhật sản phẩm thành công", Toast.LENGTH_SHORT).show();
+                showSanPham(); // Làm mới danh sách sản phẩm để hiển thị sản phẩm mới thêm vào
+            } else {
+                // Nếu có lỗi khi thêm sản phẩm, thông báo lỗi
+                Toast.makeText(EditDataActivity.this, "Lỗi khi cập nhật sản phẩm", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
     private void ActionToolBar() {
         setSupportActionBar(toolbar);
