@@ -51,7 +51,7 @@ public class ItemAdapter extends BaseAdapter {
         TextView itemName = convertView.findViewById(R.id.nameItem);
         TextView itemPrice = convertView.findViewById(R.id.priceItem);
 
-        itemImage.setImageResource(items.get(position).getImage()); // Đặt hình ảnh từ dữ liệu
+        itemImage.setImageResource(items.get(position).getImage());
         itemName.setText(items.get(position).getName()); // Đặt tên từ dữ liệu
         double price = items.get(position).getPrice();
         String formattedPrice = String.format("%,.0f đ", price);

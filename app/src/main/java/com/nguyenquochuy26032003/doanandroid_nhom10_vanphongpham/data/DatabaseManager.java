@@ -145,6 +145,8 @@ public class DatabaseManager {
     }
     // Thêm dữ liệu cảu sản phầm
     public long insertItem(long categoryId, String name, double price, int quantity, String describe, int image) {
+        // Mở cơ sở dữ liệu
+        openDatabase();
         ContentValues values = new ContentValues();
         values.put(DatabaseHelper.COLUMN_ITEM_CATEGORY_ID, categoryId);
         values.put(DatabaseHelper.COLUMN_ITEM_NAME, name);
@@ -152,7 +154,10 @@ public class DatabaseManager {
         values.put(DatabaseHelper.COLUMN_ITEM_QUANTITY, quantity);
         values.put(DatabaseHelper.COLUMN_ITEM_DESCRIBE, describe);
         values.put(DatabaseHelper.COLUMN_ITEM_IMAGE, image);
-        return database.insert(DatabaseHelper.TABLE_ITEM, null, values);
+        long result = database.insert(DatabaseHelper.TABLE_ITEM, null, values);
+        // Đóng cơ sở dữ liệu
+        closeDatabase();
+        return result;
     }
     // Hàm sửa dữ liệu Item
     public void updateItem(long itemId, long newCategoryId, String newName, double newPrice, int newQuantity, String newDescribe, int newImage) {

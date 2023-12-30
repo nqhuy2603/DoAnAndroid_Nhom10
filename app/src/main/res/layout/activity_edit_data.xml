@@ -13,14 +13,55 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         app:layout_constraintTop_toTopOf="parent" />
-
+    <TextView
+        android:id="@+id/tvEditNotySanPham"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="Nếu muốn xóa sản phẩm hãy nhập ID "
+        android:gravity="center"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        android:textColor="#F86262"
+        app:layout_constraintTop_toBottomOf="@id/toolbarEdit"/>
+    <LinearLayout
+        android:id="@+id/linearIDSanPham"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/tvEditNotySanPham">
+        <TextView
+            android:id="@+id/tvEditIDSanPham"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:layout_marginLeft="4dp"
+            android:text="ID sản phẩm: "
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:textColor="@color/black"/>
+        <EditText
+            android:id="@+id/editEditIDSanPham"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:background="@color/white"
+            android:layout_weight="1"
+            android:padding="8dp"
+            android:ems="10"
+            android:inputType="text"
+            android:hint="Nhập ở đây"
+            android:textSize="20dp"
+            android:textStyle="bold"/>
+    </LinearLayout>
     <LinearLayout
         android:id="@+id/linearTenSanPham"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@id/toolbarEdit">
+        app:layout_constraintTop_toBottomOf="@id/linearIDSanPham">
             <TextView
             android:id="@+id/tvEditName"
             android:layout_width="match_parent"
@@ -176,12 +217,42 @@
             android:textStyle="bold"/>
     </LinearLayout>
     <LinearLayout
-        android:id="@+id/linearBtnTop"
+        android:id="@+id/linearImgSanPham"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:orientation="horizontal"
         app:layout_constraintTop_toBottomOf="@id/linearMoTaSanPham">
+        <TextView
+            android:id="@+id/tvEditImgSanPhamSan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:layout_marginLeft="4dp"
+            android:text="Hình ảnh: "
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:textColor="@color/black"/>
+        <Spinner
+            android:id="@+id/editSpinnerImgSanPham"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:background="@color/white"
+            android:padding="8dp"
+            android:layout_weight="1"
+            android:textSize="20dp"
+            android:inputType="text"
+            android:textStyle="bold"/>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/linearBtnTop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/linearImgSanPham">
 
         <Button
             android:id="@+id/btnAdd"
