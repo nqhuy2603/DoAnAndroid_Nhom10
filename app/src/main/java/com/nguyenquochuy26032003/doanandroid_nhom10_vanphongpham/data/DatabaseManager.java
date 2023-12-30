@@ -208,5 +208,33 @@ public class DatabaseManager {
 
         return imageList;
     }
+    public String getCategoryNameById(int categoryId) {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+        String[] projection = {
+                DatabaseHelper.COLUMN_CATEGORY_NAME
+        };
+
+        String selection = DatabaseHelper.COLUMN_CATEGORY_ID + " = ?";
+        String[] selectionArgs = {String.valueOf(categoryId)};
+
+        Cursor cursor = db.query(
+                DatabaseHelper.TABLE_CATEGORY,
+                projection,
+                selection,
+                selectionArgs,
+                null,
+                null,
+                null
+        );
+
+        String categoryName = "";
+        if (cursor.moveToFirst()) {
+            categoryName = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.COLUMN_CATEGORY_NAME));
+        }
+
+        cursor.close();
+        return categoryName;
+    }
     // Thêm các phương thức khác để thực hiện các thao tác khác nếu cần thiết
 }

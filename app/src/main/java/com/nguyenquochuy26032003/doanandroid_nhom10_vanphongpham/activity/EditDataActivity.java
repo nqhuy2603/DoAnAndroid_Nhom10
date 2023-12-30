@@ -22,6 +22,7 @@ import androidx.core.graphics.drawable.DrawableCompat;
 
 import com.nguyenquochuy26032003.doanandroid_nhom10_vanphongpham.R;
 import com.nguyenquochuy26032003.doanandroid_nhom10_vanphongpham.adapter.ItemAdapter;
+import com.nguyenquochuy26032003.doanandroid_nhom10_vanphongpham.adapter.ShowSanPhamAdapter;
 import com.nguyenquochuy26032003.doanandroid_nhom10_vanphongpham.data.DatabaseHelper;
 import com.nguyenquochuy26032003.doanandroid_nhom10_vanphongpham.data.DatabaseManager;
 import com.nguyenquochuy26032003.doanandroid_nhom10_vanphongpham.doituong.Item;
@@ -32,13 +33,13 @@ import java.util.Random;
 
 public class EditDataActivity extends AppCompatActivity {
     Toolbar toolbar;
-    EditText edName, edPrice, edMoTa, edCategory, edSoLuong, edID;
+    EditText edName, edPrice, edMoTa, edCategory, edSoLuong;
     Spinner spinnerImg;
     Button btnAdd, btnEdit, btnDelete, btnShow;
     ListView listViewEdit;
     private DatabaseManager dbmana;
     private DatabaseHelper dbhelper;
-    private ItemAdapter itemAdapter;
+    private ShowSanPhamAdapter showSanPhamAdapter;
     List<Item> list = new ArrayList<>();
 
 
@@ -47,10 +48,7 @@ public class EditDataActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_data);
         dbmana = new DatabaseManager(EditDataActivity.this);
-        dbhelper = new DatabaseHelper(EditDataActivity.this);
-
         AnhXa();
-        ActionToolBar();
         ActionToolBar();
 
         List<String> imageList = dbmana.getImageList();
@@ -69,7 +67,6 @@ public class EditDataActivity extends AppCompatActivity {
         edMoTa = findViewById(R.id.editEditMoTaSanPham);
         edCategory = findViewById(R.id.editEditDanhMucSanPham);
         edSoLuong = findViewById(R.id.editEditSoLuongSanPham);
-        edID = findViewById(R.id.editEditIDSanPham);
         spinnerImg = findViewById(R.id.editSpinnerImgSanPham);
         btnAdd = findViewById(R.id.btnAdd);
         btnAdd.setOnClickListener(new MyEvent());
@@ -93,11 +90,13 @@ public class EditDataActivity extends AppCompatActivity {
             }
             else if(v.getId()==R.id.btnShow)
             {
-                showSanPham();
+                Intent showSanPham = new Intent(getApplicationContext(), ShowSanPhamActitivity.class);
+                startActivity(showSanPham);
             }
             else if(v.getId()==R.id.btnDelete)
             {
-                deleteSanPham();
+                Intent deleteSanPham = new Intent(getApplicationContext(), DeleteActivity.class);
+                startActivity(deleteSanPham);
             }
             else if (v.getId()==R.id.btnEdit)
             {
@@ -143,30 +142,30 @@ public class EditDataActivity extends AppCompatActivity {
 
     private void showSanPham() {
         list = dbmana.getAllItems();
-        itemAdapter = new ItemAdapter(EditDataActivity.this, list);
-        listViewEdit.setAdapter(itemAdapter);
+        showSanPhamAdapter = new ShowSanPhamAdapter(EditDataActivity.this, list);
+        listViewEdit.setAdapter(showSanPhamAdapter);
     }
 
-    private void deleteSanPham() {
-        // Lấy ID của sản phẩm muốn xóa từ EditText hoặc bất kỳ nguồn dữ liệu nào bạn đang sử dụng
-        String itemIdStr = edID.getText().toString().trim();
-
-        if (!itemIdStr.isEmpty()) {
-            long itemId = Long.parseLong(itemIdStr);
-
-            // Gọi phương thức xóa sản phẩm từ DatabaseManager
-            dbmana.deleteItem(itemId);
-
-            // Hiển thị thông báo xóa thành công
-            Toast.makeText(EditDataActivity.this, "Xóa sản phẩm thành công", Toast.LENGTH_SHORT).show();
-
-            // Làm mới danh sách sản phẩm để hiển thị danh sách mới
-            showSanPham();
-        } else {
-            // Hiển thị thông báo nếu ID sản phẩm không được nhập
-            Toast.makeText(EditDataActivity.this, "Vui lòng nhập ID sản phẩm cần xóa", Toast.LENGTH_SHORT).show();
-        }
-    }
+//    private void deleteSanPham() {
+//        // Lấy ID của sản phẩm muốn xóa từ EditText hoặc bất kỳ nguồn dữ liệu nào bạn đang sử dụng
+//        String itemIdStr = edID.getText().toString().trim();
+//
+//        if (!itemIdStr.isEmpty()) {
+//            long itemId = Long.parseLong(itemIdStr);
+//
+//            // Gọi phương thức xóa sản phẩm từ DatabaseManager
+//            dbmana.deleteItem(itemId);
+//
+//            // Hiển thị thông báo xóa thành công
+//            Toast.makeText(EditDataActivity.this, "Xóa sản phẩm thành công", Toast.LENGTH_SHORT).show();
+//
+//            // Làm mới danh sách sản phẩm để hiển thị danh sách mới
+//            showSanPham();
+//        } else {
+//            // Hiển thị thông báo nếu ID sản phẩm không được nhập
+//            Toast.makeText(EditDataActivity.this, "Vui lòng nhập ID sản phẩm cần xóa", Toast.LENGTH_SHORT).show();
+//        }
+//    }
     private void editSanPham() {
 
     }

@@ -17,6 +17,15 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".activity.ShowSanPhamActitivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.DeleteActivity"
+            android:exported="false" />
+        <activity
+            android:name=".adapter.ShowSanPhamAdapter"
+            android:exported="false" />
+        <activity
             android:name=".activity.EditDataActivity"
             android:exported="false" />
         <activity
