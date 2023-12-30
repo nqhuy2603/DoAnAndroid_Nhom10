@@ -144,20 +144,24 @@ public class DatabaseManager {
         db.close();
     }
     // Thêm dữ liệu cảu sản phầm
-    public long insertItem(long categoryId, String name, double price, int quantity, String describe, int image) {
+    public long insertItem(long categoryId, String name, double price, int quantity, String describe, String imagePath) {
+        // Mở cơ sở dữ liệu
+        openDatabase();
         ContentValues values = new ContentValues();
         values.put(DatabaseHelper.COLUMN_ITEM_CATEGORY_ID, categoryId);
         values.put(DatabaseHelper.COLUMN_ITEM_NAME, name);
         values.put(DatabaseHelper.COLUMN_ITEM_PRICE, price);
         values.put(DatabaseHelper.COLUMN_ITEM_QUANTITY, quantity);
         values.put(DatabaseHelper.COLUMN_ITEM_DESCRIBE, describe);
-        values.put(DatabaseHelper.COLUMN_ITEM_IMAGE, image);
-        return database.insert(DatabaseHelper.TABLE_ITEM, null, values);
+        values.put(DatabaseHelper.COLUMN_ITEM_IMAGE, imagePath);
+        long result = database.insert(DatabaseHelper.TABLE_ITEM, null, values);
+        // Đóng cơ sở dữ liệu
+        closeDatabase();
+        return result;
     }
     // Hàm sửa dữ liệu Item
-    public void updateItem(long itemId, long newCategoryId, String newName, double newPrice, int newQuantity, String newDescribe, int newImage) {
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
-
+    public long updateItem(long itemId, long newCategoryId, String newName, int newPrice, int newQuantity, String newDescribe, String newImage) {
+        openDatabase();
         ContentValues values = new ContentValues();
         values.put(DatabaseHelper.COLUMN_ITEM_CATEGORY_ID, newCategoryId);
         values.put(DatabaseHelper.COLUMN_ITEM_NAME, newName);
@@ -166,8 +170,9 @@ public class DatabaseManager {
         values.put(DatabaseHelper.COLUMN_ITEM_DESCRIBE, newDescribe);
         values.put(DatabaseHelper.COLUMN_ITEM_IMAGE, newImage);
 
-        db.update(DatabaseHelper.TABLE_ITEM, values, DatabaseHelper.COLUMN_ITEM_ID + "=?", new String[]{String.valueOf(itemId)});
-        db.close();
+        long result = database.update(DatabaseHelper.TABLE_ITEM, values, DatabaseHelper.COLUMN_ITEM_ID + "=?", new String[]{String.valueOf(itemId)});
+        closeDatabase();
+        return result;
     }
 
     // Hàm xóa dữ liệu Item
@@ -177,6 +182,59 @@ public class DatabaseManager {
         db.close();
     }
 
+    public List<String> getImageList() {
+        List<String> imageList = new ArrayList<>();
 
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Cursor cursor = db.query(
+                true, // distinct
+                DatabaseHelper.TABLE_ITEM, // table name
+                new String[]{DatabaseHelper.COLUMN_ITEM_IMAGE}, // columns to return
+                null, // selection
+                null, // selectionArgs
+                null, // groupBy
+                null, // having
+                null, // orderBy
+                null  // limit
+        );
+
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                String imagePath = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.COLUMN_ITEM_IMAGE));
+                imageList.add(imagePath);
+            } while (cursor.moveToNext());
+            cursor.close();
+        }
+
+        return imageList;
+    }
+    public String getCategoryNameById(int categoryId) {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+        String[] projection = {
+                DatabaseHelper.COLUMN_CATEGORY_NAME
+        };
+
+        String selection = DatabaseHelper.COLUMN_CATEGORY_ID + " = ?";
+        String[] selectionArgs = {String.valueOf(categoryId)};
+
+        Cursor cursor = db.query(
+                DatabaseHelper.TABLE_CATEGORY,
+                projection,
+                selection,
+                selectionArgs,
+                null,
+                null,
+                null
+        );
+
+        String categoryName = "";
+        if (cursor.moveToFirst()) {
+            categoryName = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.COLUMN_CATEGORY_NAME));
+        }
+
+        cursor.close();
+        return categoryName;
+    }
     // Thêm các phương thức khác để thực hiện các thao tác khác nếu cần thiết
 }

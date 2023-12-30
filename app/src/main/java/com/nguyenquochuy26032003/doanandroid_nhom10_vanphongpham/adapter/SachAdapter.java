@@ -51,19 +51,20 @@ public class SachAdapter extends RecyclerView.Adapter<SachAdapter.MyViewHolder> 
                     if (!isLongClick) {
                         //click
                         Intent intent = new Intent(context, ChiTietSanPhamActivity.class);
+                        intent.putExtra("chitiet", item);
 //                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         context.startActivity(intent);
                     }
                 }
             });
         } else {
-            // Xử lý khi item là null, có thể là hiển thị một giá trị mặc định hoặc làm gì đó phù hợp với ứng dụng của bạn.
+            // Xử lý khi item là null, có thể là hiển thị một giá trị mặc định hoặc làm gì đó phù hợp với ứng dụng
         }
     }
 
     @Override
     public int getItemCount() {
-        return array.size();
+        return array != null ? array.size() : 0;
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {

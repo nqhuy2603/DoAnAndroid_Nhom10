@@ -12,7 +12,6 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.nguyenquochuy26032003.doanandroid_nhom10_vanphongpham.R;
-import com.nguyenquochuy26032003.doanandroid_nhom10_vanphongpham.adapter.ItemAdapter;
 import com.nguyenquochuy26032003.doanandroid_nhom10_vanphongpham.adapter.SachAdapter;
 import com.nguyenquochuy26032003.doanandroid_nhom10_vanphongpham.data.DatabaseHelper;
 import com.nguyenquochuy26032003.doanandroid_nhom10_vanphongpham.data.DatabaseManager;
@@ -20,19 +19,18 @@ import com.nguyenquochuy26032003.doanandroid_nhom10_vanphongpham.doituong.Item;
 
 import java.util.List;
 
-public class VietActivity extends AppCompatActivity {
+public class RangDongActivity extends AppCompatActivity {
     Toolbar toolbar;
     RecyclerView recyclerView;
     private DatabaseManager dbmana;
     private DatabaseHelper dbhelper;
     private List<Item> items;
-    private ItemAdapter itemAdapter;
 
-    SachAdapter sachAdapter;
+    private SachAdapter sachAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_viet);
+        setContentView(R.layout.activity_rang_dong_acitvity);
 
         AnhXa();
         ActionToolBar();
@@ -44,7 +42,7 @@ public class VietActivity extends AppCompatActivity {
         dbhelper = new DatabaseHelper(this);
 
         // Lấy danh sách Category từ cơ sở dữ liệu
-        items = dbmana.getItems(2);
+        items = dbmana.getItems(7);
 
         // Khởi tạo và đặt Adapter cho ListView
         sachAdapter = new SachAdapter(this, items);
@@ -70,8 +68,8 @@ public class VietActivity extends AppCompatActivity {
     }
 
     private void AnhXa() {
-        toolbar = findViewById(R.id.toolbarViet);
-        recyclerView = findViewById(R.id.recyclerviewViet);
+        toolbar = findViewById(R.id.toolbarRangDong);
+        recyclerView = findViewById(R.id.recyclerviewRangDong);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);

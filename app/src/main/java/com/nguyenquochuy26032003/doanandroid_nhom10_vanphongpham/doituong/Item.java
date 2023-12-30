@@ -1,6 +1,10 @@
 package com.nguyenquochuy26032003.doanandroid_nhom10_vanphongpham.doituong;
 
-public class Item {
+import android.widget.EditText;
+
+import java.io.Serializable;
+
+public class Item implements Serializable {
     private int id;
     private int idc;
     private String name;
@@ -9,7 +13,7 @@ public class Item {
     private String describe;
     private int image;
 
-    public Item(int id, int idc, String name, float price, int quantity, String describe, int image) {
+    public Item(int id, int idc, String name, double price, int quantity, String describe, int image) {
         this.id = id;
         this.idc = idc;
         this.name = name;

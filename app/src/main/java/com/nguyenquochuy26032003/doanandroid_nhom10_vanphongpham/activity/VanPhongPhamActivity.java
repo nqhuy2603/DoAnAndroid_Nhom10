@@ -20,19 +20,18 @@ import com.nguyenquochuy26032003.doanandroid_nhom10_vanphongpham.doituong.Item;
 
 import java.util.List;
 
-public class VietActivity extends AppCompatActivity {
+public class VanPhongPhamActivity extends AppCompatActivity {
     Toolbar toolbar;
     RecyclerView recyclerView;
     private DatabaseManager dbmana;
     private DatabaseHelper dbhelper;
     private List<Item> items;
-    private ItemAdapter itemAdapter;
 
-    SachAdapter sachAdapter;
+    private SachAdapter sachAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_viet);
+        setContentView(R.layout.activity_van_phong_pham);
 
         AnhXa();
         ActionToolBar();
@@ -44,7 +43,7 @@ public class VietActivity extends AppCompatActivity {
         dbhelper = new DatabaseHelper(this);
 
         // Lấy danh sách Category từ cơ sở dữ liệu
-        items = dbmana.getItems(2);
+        items = dbmana.getItems(6);
 
         // Khởi tạo và đặt Adapter cho ListView
         sachAdapter = new SachAdapter(this, items);
@@ -70,8 +69,8 @@ public class VietActivity extends AppCompatActivity {
     }
 
     private void AnhXa() {
-        toolbar = findViewById(R.id.toolbarViet);
-        recyclerView = findViewById(R.id.recyclerviewViet);
+        toolbar = findViewById(R.id.toolbarVanPhongPham);
+        recyclerView = findViewById(R.id.recyclerviewVanPhongPham);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);

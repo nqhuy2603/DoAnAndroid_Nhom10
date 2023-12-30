@@ -1,59 +1,50 @@
 package com.nguyenquochuy26032003.doanandroid_nhom10_vanphongpham.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.Spinner;
-import android.widget.TextView;
-import androidx.appcompat.widget.Toolbar;
+import android.widget.ListView;
 
-import com.bumptech.glide.Glide;
 import com.nguyenquochuy26032003.doanandroid_nhom10_vanphongpham.R;
+import com.nguyenquochuy26032003.doanandroid_nhom10_vanphongpham.adapter.ShowSanPhamAdapter;
+import com.nguyenquochuy26032003.doanandroid_nhom10_vanphongpham.data.DatabaseManager;
 import com.nguyenquochuy26032003.doanandroid_nhom10_vanphongpham.doituong.Item;
 
-public class ChiTietSanPhamActivity extends AppCompatActivity {
-    TextView name, priceItem, mota;
-    Button btnThem;
-    ImageView imgHinh;
-    Spinner spinner;
-    Toolbar toolbar;
+import java.util.ArrayList;
+import java.util.List;
 
+public class ShowSanPhamActitivity extends AppCompatActivity {
+    Toolbar toolbar;
+    private DatabaseManager dbmana;
+    private ShowSanPhamAdapter showSanPhamAdapter;
+    List<Item> list = new ArrayList<>();
+    ListView listViewShow;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chi_tiet_san_pham);
+        setContentView(R.layout.activity_show_san_pham_actitivity);
         AnhXa();
         ActionToolBar();
-        getData();
-    }
+        dbmana = new DatabaseManager(ShowSanPhamActitivity.this);
+        showSanPham();
 
-    private void getData() {
-        Item item = (Item) getIntent().getSerializableExtra("chitiet");
-        if (item != null) {
-            name.setText(item.getName());
-            mota.setText(item.getDescribe());
-            Glide.with(getApplicationContext()).load(item.getImage()).into(imgHinh);
-            double price = item.getPrice();
-            String formattedPrice = String.format("%,.0f đ", price);
-            priceItem.setText(formattedPrice);
-        }
+
     }
 
     private void AnhXa() {
-        name = findViewById(R.id.tvTenSanPham);
-        priceItem = findViewById(R.id.tvGiaSanPham);
-        mota = findViewById(R.id.tvMoTaSanPham);
-        btnThem = findViewById(R.id.btnThemVaoGioHang);
-        imgHinh = findViewById(R.id.imgChiTiet);
-        spinner = findViewById(R.id.spinnerSanPham);
-        toolbar = findViewById(R.id.toolbarChiTietSach);
+        toolbar = findViewById(R.id.toolbarShow);
+        listViewShow = findViewById(R.id.listViewShow);
+    }
+
+    private void showSanPham() {
+        list = dbmana.getAllItems();
+        showSanPhamAdapter = new ShowSanPhamAdapter(ShowSanPhamActitivity.this, list);
+        listViewShow.setAdapter(showSanPhamAdapter);
     }
 
     private void ActionToolBar() {

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.DeleteActivity">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarDelete"
+        android:background="@color/black"
+        app:title="Xóa sản phẩm"
+        app:titleTextColor="@color/textBold"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ListView
+        android:id="@+id/listViewDelete"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarDelete"
+        app:layout_constraintVertical_bias="0.007"
+        tools:layout_editor_absoluteX="0dp">
+    </ListView>
+
+    <LinearLayout
+        android:id="@+id/linearIDDeleteSanPham"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/listViewDelete">
+
+        <TextView
+            android:id="@+id/tvDeleteIDSanPham"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:layout_marginLeft="4dp"
+            android:text="ID sản phẩm: "
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:textColor="@color/black"/>
+        <EditText
+            android:id="@+id/editDeleteIDSanPham"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:background="@color/white"
+            android:layout_weight="1"
+            android:padding="8dp"
+            android:ems="10"
+            android:inputType="numberSigned"
+            android:hint="Nhập ở đây"
+            android:textSize="20dp"
+            android:textStyle="bold"/>
+    </LinearLayout>
+    <TextView
+        android:id="@+id/tvDeleteNotyDelete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nếu muốn xóa sản phẩm hãy nhập ID "
+        android:gravity="center"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        android:textColor="@color/error"
+        app:layout_constraintTop_toBottomOf="@id/linearIDDeleteSanPham"/>
+    <Button
+        android:id="@+id/btnSubmitDelete"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_weight="1"
+        android:backgroundTint="@color/error"
+        android:text="Xác nhận xóa"
+        android:inputType="numberSigned"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/tvDeleteNotyDelete"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
