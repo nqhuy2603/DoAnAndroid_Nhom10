@@ -105,7 +105,9 @@ public class EditDataActivity extends AppCompatActivity {
         }
     }
 
+    // Phương thức để thêm sản phẩm mới vào cơ sở dữ liệu
     private void addSanPham() {
+        // Lấy giá trị từ các trường nhập liệu
         String name = edName.getText().toString().trim();
         String priceStr = edPrice.getText().toString().trim();
         String moTa = edMoTa.getText().toString().trim();
@@ -118,22 +120,23 @@ public class EditDataActivity extends AppCompatActivity {
         Integer soLuong = soLuongStr.isEmpty() ? null : Integer.parseInt(soLuongStr);
         // Retrieve the selected image from the Spinner
 
+        // Lấy hình ảnh được chọn từ Spinner
         String selectedImage = spinnerImg.getSelectedItem().toString();
 
         if (name.isEmpty() || moTa.isEmpty() || category.isEmpty() || priceStr.isEmpty()) {
             // Hiển thị thông báo nếu có trường nào đó không được nhập
             Toast.makeText(EditDataActivity.this, "Vui lòng điền đầy đủ thông tin, trừ id", Toast.LENGTH_SHORT).show();
         } else if (!id.isEmpty()) {
-            Toast.makeText(EditDataActivity.this, "Bạn đang thực hiện thao tác thêm, vui lòng không nhập id", Toast.LENGTH_SHORT).show();
-        }
+            // Hiển thị thông báo nếu đang thực hiện thao tác thêm mà nhập id
+            Toast.makeText(EditDataActivity.this, "Bạn đã thực hiện thao tác thêm, vui lòng không nhập id", Toast.LENGTH_SHORT).show();
+        } 
 
         else {
-
-
-            // Tạo đối tượng Item từ thông tin nhập vào
+            // Nếu tất cả các trường được nhập đúng
+            
+            // Chuyển đổi categoryId từ String sang Long (tùy thuộc vào cách categoryId)
             long categoryId = Long.parseLong(category);  // Gán categoryId của bạn tùy thuộc vào cách bạn lấy được categoryId
             long result = dbmana.insertItem(categoryId, name, price, 0, moTa, selectedImage);
-//            String.valueOf(R.drawable.hinh_anh_san_pham_2)
             if (result > 0) {
                 // Nếu thêm thành công, thông báo và làm mới danh sách sản phẩm
                 Toast.makeText(EditDataActivity.this, "Thêm sản phẩm thành công", Toast.LENGTH_SHORT).show();
@@ -150,7 +153,10 @@ public class EditDataActivity extends AppCompatActivity {
         showSanPhamAdapter = new ShowSanPhamAdapter(EditDataActivity.this, list);
         listViewEdit.setAdapter(showSanPhamAdapter);
     }
+
+     // Phương thức để cập nhật thông tin sản phẩm trong cơ sở dữ liệu
     private void editSanPham() {
+        // Lấy giá trị từ các trường nhập liệu
         String itemIdStr = edID.getText().toString().trim();
         String name = edName.getText().toString().trim();
         String priceStr = edPrice.getText().toString().trim();
@@ -161,12 +167,9 @@ public class EditDataActivity extends AppCompatActivity {
         String id = edID.getText().toString().trim();
 
         // Kiểm tra giá trị null cho các trường không được nhập
-
         if (itemIdStr.isEmpty() || name.isEmpty() ||  category.isEmpty() || soLuongStr.isEmpty() || priceStr.isEmpty() || moTa.isEmpty()) {
             // Hiển thị thông báo nếu có trường nào đó không được nhập
             Toast.makeText(EditDataActivity.this, "Vui lòng điền đầy đủ thông tin", Toast.LENGTH_SHORT).show();
-        }else if (!id.isEmpty()) {
-            Toast.makeText(EditDataActivity.this, "Bạn đang thực hiện thao tác thêm, vui lòng không nhập id", Toast.LENGTH_SHORT).show();
         } else {
             Integer itemId = Integer.parseInt(itemIdStr);
             Integer price = Integer.parseInt(priceStr);
